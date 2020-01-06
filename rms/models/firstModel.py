@@ -90,3 +90,4 @@ class roomallotment(models.Model):
     allotOut_date=fields.Date(String="Check-out Date")
     Total_rent=fields.Integer(String="Total Rent",compute="set_rent_month",store=True)
     Paymnent=fields.Selection([('1','1'),('3','3'),('6','6'),('12','12')],String="Paymnent Months")
+
