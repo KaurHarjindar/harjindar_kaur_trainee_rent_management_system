@@ -3,4 +3,5 @@ access_training_owner,training.owner,model_training_owner,base.group_user,1,1,1,
 access_training_tenant,training.tenant,model_training_tenant,base.group_user,1,1,1,1
 access_training_room,training.room,model_training_room,base.group_user,1,1,1,1
 access_training_hostel,training.hostel,model_training_hostel,base.group_user,1,1,1,1
+access_training_roomallotment,training.roomallotment,model_training_roomallotment,base.group_user,1,1,1,1
 access_training_roomfeature,training.roomfeature,model_training_roomfeature,base.group_user,1,1,1,1
