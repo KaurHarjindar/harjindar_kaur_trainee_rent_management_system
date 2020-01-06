@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_training_owner,training.owner,model_training_owner,base.group_user,1,1,1,1
+access_training_tenant,training.tenant,model_training_tenant,base.group_user,1,1,1,1
+access_training_room,training.room,model_training_room,base.group_user,1,1,1,1
+access_training_hostel,training.hostel,model_training_hostel,base.group_user,1,1,1,1
+access_training_roomfeature,training.roomfeature,model_training_roomfeature,base.group_user,1,1,1,1

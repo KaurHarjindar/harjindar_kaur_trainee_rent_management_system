@@ -1,0 +1,153 @@
+<odoo>
+	
+	<record id="hostel_form" model="ir.ui.view">
+		<field name="name">training.hostel.form</field>
+		<field name="model">training.hostel</field>
+		<field name="arch" type="xml">
+			<form String="hostel form">
+				<sheet>
+					<field name="roomID"/>
+					<field name="name"/>
+				</sheet>		
+			</form>
+		</field>
+	</record>
+
+	<record id="room_form" model="ir.ui.view">
+		<field name="name">training.room.form</field>
+		<field name="model">training.room</field>
+		<field name="arch" type="xml">
+			<form String="room form">
+				<sheet>
+					<group>
+						<field name="hostelId"/>
+						<field name="roomNumber"/>
+						<!-- <field name="Hostelname"/> -->				
+					</group>
+				</sheet>		
+			</form>
+		</field>
+	</record>
+
+	<record id="tenant_form" model="ir.ui.view">
+		<field name="name">training.tenant.form</field>
+		<field name="model">training.tenant</field>
+		<field name="arch" type="xml">
+			<form String="tenant form">
+				<sheet>
+					<group>	
+						<group>
+							<field name="tenant_id" />
+							<field name="dob" />
+							<field name="gender" />
+							<field name="Marital_status" />
+							<field name="Home_address" />
+							<field name="Occupation" />
+							<field name="Joining_date"/>
+						</group>
+						<group>
+							<field name="tenant_name" />
+							<field name="phone" />
+							<field name="email" />
+							<field name="Religion" />	
+							<field name="Father_name" />
+							<field name="Fphone" />
+							<field name="room_ids" />
+						</group>
+					</group>
+				</sheet>		
+			</form>
+		</field>
+	</record>
+
+	<record id="owner_form" model="ir.ui.view">
+		<field name="name">training.owner.form</field>
+		<field name="model">training.owner</field>
+		<field name="arch" type="xml">
+			<form String="owner">
+				<sheet>
+					<group>	
+						<group>
+							<field name="owner_id" />
+							<field name="email" />	
+						</group>
+						<group>
+							<field name="owner_name" />
+							<field name="password" />
+						</group>
+					</group>
+				</sheet>		
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="owner_search_view">
+            <field name="name">owner.search</field>
+            <field name="model">training.owner</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="owner_id"/>
+                    <field name="owner_name"/>
+                </search>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="training_feature_form">
+        <field name="name">roomfeature.form</field>
+        <field name="model">training.roomfeature</field>
+       	<field name="arch" type="xml">
+            <form string="Course Form">
+                <sheet>
+                    <group>
+                        <field name="featurename"/>
+                        <field name="dess"/>
+                        <field name="hostelIds"/>
+                       <!--  <field name="t_age" />
+                        <field name="age_group" /> -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="training_feature" model="ir.actions.act_window">
+    	<field name="name">training roomfeature</field>
+    	<field name="res_model">training.roomfeature</field>
+    	<field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="training_tenant_regi" model="ir.actions.act_window">
+		<field name="name">training tenantRegi</field>
+		<field name="res_model">training.tenant</field>
+		<field name="view_mode">tree,form</field>
+    </record>
+
+	<record id="marse_marse_action3" model="ir.actions.act_window">
+		<field name="name">training tenant</field>
+		<field name="res_model">training.owner</field>
+		<field name="view_mode">tree,form</field>
+    </record>
+
+     <record id="action_hostel" model="ir.actions.act_window">
+		<field name="name">hostel</field>
+		<field name="res_model">training.hostel</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<record id="training_room_regi" model="ir.actions.act_window">
+		<field name="name">training room</field>
+		<field name="res_model">training.room</field>
+		<field name="view_mode">tree,form</field>
+    </record>
+
+	
+	<!-- main Root -->
+	<menuitem id="tenants_root" name="Tenants Management"/>
+	<menuitem id="tenants_owner_root" name="owner" parent="tenants_root"/>
+	<menuitem id="tenants_manage" name="ownerRegi" parent="tenants_owner_root" action="marse_marse_action3"  />
+	<menuitem id="tenants_regi" name="tenant" parent="tenants_root" action="training_tenant_regi"  />
+	<menuitem id="tenants_hostel" name="Hostel" parent="tenants_root" action="action_hostel" />
+	<menuitem id="tenants_room" name="Room" parent="tenants_root"  />
+	<menuitem id="tenants_room1" name="RoomRegi" parent="tenants_room" action="training_room_regi"  />
+	<menuitem id="tenants_roomdfeature" name="Feature" parent="tenants_room" action="training_feature" />
+</odoo>
