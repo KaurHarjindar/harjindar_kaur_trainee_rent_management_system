@@ -1,5 +1,5 @@
 {
-    'name' : 'Rent Management system',
+    'name' : 'Tenants Management system',
     'version' : '1.1',
     'summary' : 'manage the tenants',
     'data' : [

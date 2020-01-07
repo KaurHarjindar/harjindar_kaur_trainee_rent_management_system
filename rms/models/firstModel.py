@@ -19,8 +19,6 @@ class owner(models.Model):
         for rec in self:
             rec.write({'state': 'Complete'})
 
-
-    owner_id = fields.Char(String="owner_id")
     owner_name = fields.Char(String="owner_name")
     email = fields.Text(String="owner_email")
     password = fields.Text(String="owner_password")
@@ -65,6 +63,7 @@ class room(models.Model):
 
     hostelId=fields.Many2one("training.hostel",String="Many Rooms")
     roomNumber=fields.Integer(String="room Numbers")
+    allot_id=fields.One2many("training.roomallotment","hostelIds",String="hostelIds")
 
 
 class hostel(models.Model):
@@ -73,6 +72,7 @@ class hostel(models.Model):
 
     roomID=fields.One2many("training.room","hostelId",String="One Hostel")
     name=fields.Char(string="HostelName")
+    featname=fields.Many2many("training.roomfeature",String="featname")
     
             
 class roomfeature(models.Model):
@@ -82,8 +82,6 @@ class roomfeature(models.Model):
 
     featurename=fields.Char(String="featurename")
     dess=fields.Char(String="Description")
-    hostelIds=fields.Many2many("training.hostel",String="hostelIds")
-
 
 class roomallotment(models.Model):
     _name="training.roomallotment"
@@ -109,5 +107,5 @@ class roomallotment(models.Model):
     allotOut_date=fields.Date(String="Check-out Date")
     Total_rent=fields.Integer(String="Total Rent",compute="set_rent_month",store=True)
     Paymnent=fields.Selection([('1','1'),('3','3'),('6','6'),('12','12')],String="Paymnent Months")
-    
+    hostelIds=fields.Many2one("training.room",String="Many Rooms")
 
