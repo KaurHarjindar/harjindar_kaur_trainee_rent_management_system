@@ -37,6 +37,18 @@
             </field>
     </record>
 
+    <record model="ir.ui.view" id="alloteviewGraph">
+        <field name="name">training.tree</field>
+        <field name="model">training.roomallotment</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="allot_id"/>
+                <field name="Paymnent" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+
     <record model="ir.ui.view" id="alloteview">
         <field name="name">training.tree</field>
         <field name="model">training.roomallotment</field>
@@ -45,6 +57,10 @@
                 <field name="allot_id"/>
                 <field name="Paymnent" />
             </calendar>
+            <graph>
+                <field name="allot_id"  />
+                <field name="Total_rent" type="measure" />
+            </graph>
         </field>
     </record>
 
@@ -131,6 +147,12 @@
         <field name="model">training.owner</field>
         <field name="arch" type="xml">
             <form String="owner">
+                <header>
+                    <button string="Start" type="object" name="button_start" class="oe_highlight"/>
+                    <button string="Running" type="object" name="button_running" />
+                    <button string="Complete" type="object" name="button_Stop"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
                 <sheet>
                     <group> 
                         <group>
@@ -207,13 +229,13 @@
     <record id="training_roomallotment" model="ir.actions.act_window">
         <field name="name">training roomallotment</field>
         <field name="res_model">training.roomallotment</field>
-        <field name="view_mode">tree,form,calendar</field>
+        <field name="view_mode">tree,form,calendar,graph</field>
     </record>
 
     
     <!-- main Root -->
     <menuitem id="tenants_root" name="Tenants Management"/>
-    <menuitem id="tenants_owner_root" name="owner" parent="tenants_root"/>
+    <menuitem id="tenants_owner_root" name="Owner" parent="tenants_root"/>
     <menuitem id="tenants_manage" name="ownerRegi" parent="tenants_owner_root" action="marse_marse_action3"  />
     <menuitem id="tenants_regi" name="Tenant" parent="tenants_root" action="training_tenant_regi"  />
     <menuitem id="tenants_hostel" name="Hostel" parent="tenants_root" action="action_hostel" />
