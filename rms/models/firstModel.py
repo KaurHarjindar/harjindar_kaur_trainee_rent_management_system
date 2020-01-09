@@ -6,6 +6,11 @@ class owner(models.Model):
     _description = "owner record"
     _rec_name="owner_name"
 
+    @api.model
+    def create(self,val):
+        print (val['email'])
+        return super(owner,self).create(val)
+
     owner_name = fields.Char(String="owner_name")
     email = fields.Text(String="owner_email")
     password = fields.Text(String="owner_password")

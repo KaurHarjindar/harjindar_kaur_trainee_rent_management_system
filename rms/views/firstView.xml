@@ -1,10 +1,34 @@
 <odoo>
 
+
+    <record model="ir.ui.view" id="tenanteview">
+        <field name="name">training.tree</field>
+        <field name="model">training.tenant</field>
+        <field name="arch" type="xml">
+            <tree string="tree view" decoration-info="Occupation=='Study'">
+                <field name="tenant_id" />
+                <field name="dob" />
+                <field name="gender" />
+                <field name="Marital_status" />
+                <field name="Home_address" />
+                <field name="Occupation" />
+                <field name="Joining_date"/>
+                <field name="tenant_name" />
+                <field name="phone" />
+                <field name="email" />
+                <field name="Religion" />   
+                <field name="Father_name" />
+                <field name="Fphone" />
+                <field name="room_ids" />
+            </tree>
+        </field>
+    </record>
+
     <record model="ir.ui.view" id="kanban_view">
         <field name="name">training.kanban</field>
         <field name="model">training.room</field>
         <field name="arch" type="xml">
-            <kanban group_by="id">
+            <kanban default_group_by="hostelId">
                 <field name="roomNumber" />
                 <field name="hostelId" />
                 <field name="allot_ids" />
@@ -31,75 +55,6 @@
                 </templates>
             </kanban>
         </field>
-    </record>
-
-    <!-- <record model="ir.ui.view" id="ownerForm">
-        <field name="name">training.tree</field>
-        <field name="model">training.owner</field>
-        <field name="arch" type="xml">
-            <form>
-                <header clickable="true">
-                    <button name="button_start" string="Started" states="Running" type="object"  class="oe_highlight"/>
-                    <button name="button_running" string="Running mode" states="Start,Complete" type="object"    class="oe_highlight"/>
-                    <button name="button_Stop" string="Completed" type="object" states="Start,Running"  class="oe_highlight"/>
-                    <field  name="state" widget="statusbar"  />
-                </header>
-                <sheet>
-                    <group>
-                        <field name="owner_name" />
-                        <field name="email" />
-                        <field name="password" />
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record model="ir.ui.view" id="owner_search_view">
-            <field name="name">owner.search</field>
-            <field name="model">training.owner</field>
-            <field name="arch" type="xml">
-                <search>
-                    <field name="owner_name"/>
-                </search>
-            </field>
-    </record>
-
-    <record model="ir.ui.view" id="tenanteview">
-        <field name="name">training.tree</field>
-        <field name="model">training.tenant</field>
-        <field name="arch" type="xml">
-            <tree string="tree view" decoration-info="Occupation=='Study'">
-                <field name="tenant_id" />
-                <field name="dob" />
-                <field name="gender" />
-                <field name="Marital_status" />
-                <field name="Home_address" />
-                <field name="Occupation" />
-                <field name="Joining_date"/>
-                <field name="tenant_name" />
-                <field name="phone" />
-                <field name="email" />
-                <field name="Religion" />   
-                <field name="Father_name" />
-                <field name="Fphone" />
-                <field name="room_ids" />
-            </tree>
-        </field>
-    </record>
- -->
-    <record model="ir.ui.view" id="tenant_search_view">
-            <field name="name">tenant.search</field>
-            <field name="model">training.tenant</field>
-            <field name="arch" type="xml">
-                <search>
-                    <field name="tenant_name" filter_domain="['|',('tenant_name','ilike',self),('gender','ilike',self)]"/>
-                    <filter string="Female" name="Female" domain="[('gender','=','Female')]"/>
-                    <group string="Group By">
-                        <filter string="Religion" name="Religion" context="{'group_by':'Religion'}"/>
-                    </group>
-                </search>
-            </field>
     </record>
 
     <record id="hostel_form" model="ir.ui.view">
@@ -148,6 +103,9 @@
         <field name="model">training.roomallotment</field>
         <field name="arch" type="xml">
             <form String="roomallotment form">
+                <header>
+                    <button name="%(training_roomissue_view)d" type="action" class="oe_highlight" string="Add RoomIssue"  />
+                </header>
                 <sheet>
                     <group>
                         <field name="allot_id"/>
@@ -189,18 +147,6 @@
 
     <!-- Actions -->
 
-    <!-- <record id="marse_marse_action3" model="ir.actions.act_window">
-        <field name="name">training tenant</field>
-        <field name="res_model">training.owner</field>
-        <field name="view_mode">tree,form</field>
-    </record> -->
-
-    <record id="training_tenant_regi" model="ir.actions.act_window">
-        <field name="name">training tenantRegi</field>
-        <field name="res_model">training.tenant</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
      <record id="action_hostel" model="ir.actions.act_window">
         <field name="name">hostel</field>
         <field name="res_model">training.hostel</field>
@@ -228,12 +174,10 @@
     
     <!-- main Root -->
     <menuitem id="tenants_root" name="Tenants Management"/>
-    <!-- <menuitem id="tenants_owner_root" name="Owner" parent="tenants_root"/>
-    <menuitem id="tenants_manage" name="ownerRegi" parent="tenants_owner_root" action="marse_marse_action3"/> -->
-    <menuitem id="tenants_regi" name="Tenant" parent="tenants_root" action="training_tenant_regi"  />
     <menuitem id="tenants_hostel" name="Hostel" parent="tenants_root" action="action_hostel" />
     <menuitem id="tenants_room" name="Room" parent="tenants_root"  />
     <menuitem id="tenants_room1" name="RoomRegi" parent="tenants_room" action="training_room_regi"  />
     <menuitem id="tenants_roomdfeature" name="Feature" parent="tenants_room" action="training_feature" />
     <menuitem id="tenants_roomdallotment" name="roomallotment" parent="tenants_root" action="training_roomallotment" />
+
 </odoo>
