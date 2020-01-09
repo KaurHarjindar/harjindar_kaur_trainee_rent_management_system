@@ -6,19 +6,6 @@ class owner(models.Model):
     _description = "owner record"
     _rec_name="owner_name"
 
-    @api.depends
-    def button_start(self):
-       for rec in self:
-           rec.write({'state': 'Start'})
-    @api.depends
-    def button_running(self):
-        for rec in self:
-            rec.write({'state': 'Running'})
-    @api.depends
-    def button_Stop(self):
-        for rec in self:
-            rec.write({'state': 'Complete'})
-
     owner_name = fields.Char(String="owner_name")
     email = fields.Text(String="owner_email")
     password = fields.Text(String="owner_password")
@@ -27,6 +14,18 @@ class owner(models.Model):
         ('Running','Running'),
         ('Complete','Complete'),
         ],string="state",default="Start",readonly=True)
+
+    def button_start(self):
+       for rec in self:
+           rec.write({'state': 'Start'})
+
+    def button_running(self):
+        for rec in self:
+            rec.write({'state': 'Running'})
+
+    def button_Stop(self):
+        for rec in self:
+            rec.write({'state': 'Complete'})
 
 class tenant(models.Model):
     _name="training.tenant"
@@ -63,14 +62,14 @@ class room(models.Model):
 
     hostelId=fields.Many2one("training.hostel",String="Many Rooms")
     roomNumber=fields.Integer(String="room Numbers")
-    allot_id=fields.One2many("training.roomallotment","hostelIds",String="hostelIds")
+    allot_ids=fields.One2many("training.roomallotment","hostelIds",String="hostelIds")
 
 
 class hostel(models.Model):
     _name="training.hostel"
     _description="hostel table"
 
-    roomID=fields.One2many("training.room","hostelId",String="One Hostel")
+    roomIDs=fields.One2many("training.room","hostelId",String="One Hostel")
     name=fields.Char(string="HostelName")
     featname=fields.Many2many("training.roomfeature",String="featname")
     
@@ -108,4 +107,10 @@ class roomallotment(models.Model):
     Total_rent=fields.Integer(String="Total Rent",compute="set_rent_month",store=True)
     Paymnent=fields.Selection([('1','1'),('3','3'),('6','6'),('12','12')],String="Paymnent Months")
     hostelIds=fields.Many2one("training.room",String="Many Rooms")
+
+
+
+
+
+
 

@@ -1,14 +1,48 @@
 <odoo>
-    <record model="ir.ui.view" id="ownerForm">
+
+    <record model="ir.ui.view" id="kanban_view">
+        <field name="name">training.kanban</field>
+        <field name="model">training.room</field>
+        <field name="arch" type="xml">
+            <kanban group_by="id">
+                <field name="roomNumber" />
+                <field name="hostelId" />
+                <field name="allot_ids" />
+                <templates>
+                   <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                <b>Roomnumber:</b>
+                                <field name="roomNumber"/>
+                                <field name="hostelId" />
+                                </strong>
+                                <div t-if="record.hostelId.value">
+                                    <b>HostelID:</b>
+                                    <t t-esc="record.hostelId.value"/>
+                                </div>
+                                <div t-if="record.allot_ids.value">
+                                    <b>AllotId:</b>
+                                    <t t-esc="record.allot_ids.value"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- <record model="ir.ui.view" id="ownerForm">
         <field name="name">training.tree</field>
         <field name="model">training.owner</field>
         <field name="arch" type="xml">
             <form>
-                <header>
-                    <button string="Start" type="object" name="button_start" states="Running,Complete" class="oe_highlight"/>
-                    <button string="Running" type="object" name="button_running" states="Complete"/>
-                    <button string="Complete" type="object" name="button_Stop" states="Start"/>
-                    <field name="state" widget="statusbar"/>
+                <header clickable="true">
+                    <button name="button_start" string="Started" states="Running" type="object"  class="oe_highlight"/>
+                    <button name="button_running" string="Running mode" states="Start,Complete" type="object"    class="oe_highlight"/>
+                    <button name="button_Stop" string="Completed" type="object" states="Start,Running"  class="oe_highlight"/>
+                    <field  name="state" widget="statusbar"  />
                 </header>
                 <sheet>
                     <group>
@@ -53,7 +87,7 @@
             </tree>
         </field>
     </record>
-
+ -->
     <record model="ir.ui.view" id="tenant_search_view">
             <field name="name">tenant.search</field>
             <field name="model">training.tenant</field>
@@ -74,7 +108,7 @@
         <field name="arch" type="xml">
             <form String="hostel form">
                 <group>
-                    <field name="roomID"/>
+                    <field name="roomIDs"/>
                     <field name="name"/>
                     <field name="featname"/>
                 </group>        
@@ -89,7 +123,7 @@
             <tree string="room tree" decoration-info="hostelId==1" decoration-danger="hostelId==2" >
                 <field name="hostelId" />
                 <field name="roomNumber" />
-                <field name="allot_id" />
+                <field name="allot_ids" />
             </tree>
         </field>
     </record>
@@ -155,11 +189,11 @@
 
     <!-- Actions -->
 
-    <record id="marse_marse_action3" model="ir.actions.act_window">
+    <!-- <record id="marse_marse_action3" model="ir.actions.act_window">
         <field name="name">training tenant</field>
         <field name="res_model">training.owner</field>
         <field name="view_mode">tree,form</field>
-    </record>
+    </record> -->
 
     <record id="training_tenant_regi" model="ir.actions.act_window">
         <field name="name">training tenantRegi</field>
@@ -176,7 +210,7 @@
     <record id="training_room_regi" model="ir.actions.act_window">
         <field name="name">training room</field>
         <field name="res_model">training.room</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
     </record>
 
     <record id="training_feature" model="ir.actions.act_window">
@@ -194,8 +228,8 @@
     
     <!-- main Root -->
     <menuitem id="tenants_root" name="Tenants Management"/>
-    <menuitem id="tenants_owner_root" name="Owner" parent="tenants_root"/>
-    <menuitem id="tenants_manage" name="ownerRegi" parent="tenants_owner_root" action="marse_marse_action3"/>
+    <!-- <menuitem id="tenants_owner_root" name="Owner" parent="tenants_root"/>
+    <menuitem id="tenants_manage" name="ownerRegi" parent="tenants_owner_root" action="marse_marse_action3"/> -->
     <menuitem id="tenants_regi" name="Tenant" parent="tenants_root" action="training_tenant_regi"  />
     <menuitem id="tenants_hostel" name="Hostel" parent="tenants_root" action="action_hostel" />
     <menuitem id="tenants_room" name="Room" parent="tenants_root"  />
