@@ -12,6 +12,7 @@
        	
         'views/firstView.xml',
        	'views/owner.xml',
-       	'views/tenant.xml'
+       	'views/tenant.xml',
+        'views/template.xml'
     ],
 }

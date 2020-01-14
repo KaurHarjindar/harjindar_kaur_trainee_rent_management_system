@@ -1,30 +1,7 @@
 <odoo>
 
-
-    <record model="ir.ui.view" id="tenanteview">
-        <field name="name">training.tree</field>
-        <field name="model">training.tenant</field>
-        <field name="arch" type="xml">
-            <tree string="tree view" decoration-info="Occupation=='Study'">
-                <field name="tenant_id" />
-                <field name="dob" />
-                <field name="gender" />
-                <field name="Marital_status" />
-                <field name="Home_address" />
-                <field name="Occupation" />
-                <field name="Joining_date"/>
-                <field name="tenant_name" />
-                <field name="phone" />
-                <field name="email" />
-                <field name="Religion" />   
-                <field name="Father_name" />
-                <field name="Fphone" />
-                <field name="room_ids" />
-            </tree>
-        </field>
-    </record>
-
-    <record model="ir.ui.view" id="kanban_view">
+   
+   <!--  <record model="ir.ui.view" id="kanban_view">
         <field name="name">training.kanban</field>
         <field name="model">training.room</field>
         <field name="arch" type="xml">
@@ -142,10 +119,10 @@
             </graph>
         </field>
     </record>  
+ -->
 
-
-
-    <!-- Actions -->
+<!-- 
+    Actions
 
      <record id="action_hostel" model="ir.actions.act_window">
         <field name="name">hostel</field>
@@ -169,15 +146,17 @@
         <field name="name">training roomallotment</field>
         <field name="res_model">training.roomallotment</field>
         <field name="view_mode">tree,form,calendar,graph</field>
-    </record>
+    </record> -->
 
     
-    <!-- main Root -->
-    <menuitem id="tenants_root" name="Tenants Management"/>
-    <menuitem id="tenants_hostel" name="Hostel" parent="tenants_root" action="action_hostel" />
+
+    
+   <!--  main Root -->
+   <menuitem id="tenants_root" name="Tenants Management"/>
+   <!--  <menuitem id="tenants_hostel" name="Hostel" parent="tenants_root" action="action_hostel" />
     <menuitem id="tenants_room" name="Room" parent="tenants_root"  />
     <menuitem id="tenants_room1" name="RoomRegi" parent="tenants_room" action="training_room_regi"  />
     <menuitem id="tenants_roomdfeature" name="Feature" parent="tenants_room" action="training_feature" />
-    <menuitem id="tenants_roomdallotment" name="roomallotment" parent="tenants_root" action="training_roomallotment" />
+    <menuitem id="tenants_roomdallotment" name="roomallotment" parent="tenants_root" action="training_roomallotment" /> -->
 
 </odoo>
