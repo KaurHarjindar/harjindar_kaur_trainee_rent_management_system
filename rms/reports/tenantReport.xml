@@ -1,0 +1,10 @@
+<odoo>
+	<report
+        id="report_tenants"
+        model="training.tenants"
+        string="tenants Report"
+        name="rms.report_tenant_view"
+        file="rms.report_tenant"
+        report_type="qweb-pdf" />
+
+</odoo>

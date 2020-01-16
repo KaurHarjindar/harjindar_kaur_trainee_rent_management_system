@@ -1,0 +1,198 @@
+<odoo>
+
+     <record model="ir.ui.view" id="alloteview">
+        <field name="name">training.calendar</field>
+        <field name="model">training.tenantroomallocate</field>
+        <field name="arch" type="xml">
+            <calendar string="Ideas" date_start="Joining_date"  color="Joining_date">
+                <field name="roomnumber"/>
+                <field name="rent" />
+            </calendar>
+        </field>
+    </record> 
+
+    <record model="ir.ui.view" id="alloteviewGraph">
+        <field name="name">training.Graph</field>
+        <field name="model">training.tenantroomallocate</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="roomnumber"/>
+                <field name="rent" type="measure" />
+            </graph>
+        </field>
+    </record> 
+
+    <record model="ir.ui.view" id="kanban_view">
+        <field name="name">training.kanban</field>
+        <field name="model">training.tenantroomallocate</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="propertyname">
+                <field name="roomnumber" />
+                <field name="tenantname" />
+                <field name="rent" />
+                <field name="status" />
+                <templates>
+                   <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                <b>Roomnumber:</b>
+                                <field name="roomnumber"/>
+                                <field name="propertyname" />
+                                </strong>
+                                <div t-if="record.tenantname.value">
+                                    <b>Tenant detail:</b>
+                                    <t t-esc="record.tenantname.value"/>
+                                </div>
+                                <div t-if="record.rent.value">
+                                    <b>Rent:</b>
+                                    <t t-esc="record.rent.value"/>
+                                </div>
+                                <div t-if="record.status.value">
+                                    <b>Status</b>
+                                    <t t-esc="record.status.value" />
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="tenantselection">
+        <field name="name">training tenantroomallocate</field>
+        <field name="model">training.tenantroomallocate</field>
+        <field name="arch" type="xml">
+            <tree string="tree view" >
+                <field name="propertyname" />
+                <field name="roomnumber" />
+                <field name="tenantname" />
+                <field name="rent" />
+                <field name="status" />
+                <field name="Joining_date" />
+            </tree>
+        </field>
+    </record>
+
+     <record id="rooms_tree" model="ir.ui.view">
+        <field name="name">training.rooms</field>
+        <field name="model">training.rooms</field>
+        <field name="arch" type="xml">
+            <tree string="rooms tree">
+                <field name="propertyname" />
+                <field name="block" />
+                <field name="floor" />
+                <field name="roomnumber" />
+                <field name="Bothroom" />
+                <field name="ownername" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+    
+
+
+
+    <record model="ir.ui.view" id="propertyTree">
+        <field name="name">training property</field>
+        <field name="model">training.property</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="ptype" />
+                <field name="address" />
+                <field name="city" />
+                <field name="state" />
+                <field name="location" />
+                <field name="ownername" />
+                <field name="policies" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ownerTree">
+        <field name="name">training owner</field>
+        <field name="model">training.owner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="lastname" />
+                <field name="number" />
+                <field name="email" />
+                <field name="address" />
+                <field name="city" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ownerForm">
+        <field name="name">training  owner</field>
+        <field name="model">training.owner</field>
+        <field name="arch" type="xml">
+            <form>
+               <!--  <header clickable="true">
+                    <button name="button_start" string="Started" states="Running" type="object"  class="oe_highlight"/>
+                    <button name="button_running" string="Running mode" states="Start,Complete" type="object"    class="oe_highlight"/>
+                    <button name="button_Stop" string="Completed" type="object" states="Start,Running"  class="oe_highlight"/>
+                    <field  name="state" widget="statusbar"  />
+                </header> -->
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="lastname" />
+                        <field name="number" />
+                        <field name="email" />
+                        <field name="address" />
+                        <field name="city" />
+                        <field name="state" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="owner_search_view">
+            <field name="name">owner_search</field>
+            <field name="model">training.owner</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                </search>
+            </field>
+    </record>
+
+    
+
+    <record id="owner_action" model="ir.actions.act_window">
+        <field name="name">training owner</field>
+        <field name="res_model">training.owner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="property_action" model="ir.actions.act_window">
+        <field name="name">training property</field>
+        <field name="res_model">training.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="training_rooms" model="ir.actions.act_window">
+        <field name="name">training rooms</field>
+        <field name="res_model">training.rooms</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+     <record id="training_tenantroomallocate" model="ir.actions.act_window">
+        <field name="name">training tenantRoomAllocate</field>
+        <field name="res_model">training.tenantroomallocate</field>
+        <field name="view_mode">tree,form,kanban,calendar,graph</field>
+    </record>
+
+    <menuitem id="tenants_owner_root" name="Owner" />
+    <menuitem id="owner_regi" name="Registration" parent="tenants_owner_root" action="owner_action"/>
+    <menuitem id="propertyRegi" name="AddProperty" parent="tenants_owner_root" action="property_action" />
+    <menuitem id="tenants_rooms" name="Add Room" parent="tenants_owner_root" action="training_rooms" />
+    <menuitem id="tenants_room_allocate" name="Allocate Room" parent="tenants_owner_root" action="training_tenantroomallocate" />
+</odoo>

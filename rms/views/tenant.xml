@@ -1,0 +1,77 @@
+<odoo>
+
+    <record id="roomallotment_form" model="ir.ui.view">
+        <field name="name">training.tenantroomselection</field>
+        <field name="model">training.tenantroomselection</field>
+        <field name="arch" type="xml">
+            <form String="roomallotment form">
+                <header>
+                    <button name="%(training_roomissue_view)d" type="action" class="oe_highlight" string="Add RoomIssue"  />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="propertyname"/>
+                        <field name="ownername"/>
+                        <field name="Joining_date"/>
+                    </group>
+                </sheet>        
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="tenantseview">
+        <field name="name">training.tree</field>
+        <field name="model">training.tenants</field>
+        <field name="arch" type="xml">
+            <tree string="tree view" decoration-info="Occupation=='Study'">
+                <field name="name" />
+                <field name="dob" />
+                <field name="phone" />
+                <field name="gender" />
+                <field name="email" />
+                <field name="Occupation" />
+                <field name="Marital_status" />
+                <field name="Religion" />  
+                <field name="Home_address" />
+                <field name="Father_name" />
+                <field name="Fphone" />
+            </tree>
+        </field>
+    </record>
+
+	<record model="ir.ui.view" id="tenant_search_view">
+            <field name="name">tenant.search</field>
+            <field name="model">training.tenants</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" filter_domain="['|',('name','ilike',self),('gender','ilike',self)]"/>
+                    <filter string="Female" name="Female" domain="[('gender','=','Female')]"/>
+                    <group string="Group By">
+                        <filter string="Religion" name="Religion" context="{'group_by':'Religion'}"/>
+                    </group>
+                </search>
+            </field>
+    </record>
+
+
+    <record id="training_regi" model="ir.actions.act_window">
+        <field name="name">training tenantRegi</field>
+        <field name="res_model">training.tenants</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="training_roomselection" model="ir.actions.act_window">
+        <field name="name">training tenantRoomSelection</field>
+        <field name="res_model">training.tenantroomselection</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+   
+    
+    <menuitem id="tenants_root_1" name="Tenants" parent="tenants_root" />
+    <menuitem id="tenants_registration" name="Registration" parent="tenants_root_1" action="training_regi"  />
+    <menuitem id="tenants_room_selection" name="Select Room" parent="tenants_root_1" action="training_roomselection"  />
+    
+</odoo>

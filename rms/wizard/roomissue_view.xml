@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<odoo>
+        <record id="training_roomissue_view_form" model="ir.ui.view">
+            <field name="name">taining.roomissue.form</field>
+            <field name="model">training.roomissue</field>
+            <field name="arch" type="xml">
+                <form string="room issue">
+                    <group>
+                        <field name="issueType"/>
+                        <field name="issuedes" />
+                    </group>
+                    <footer>
+                        <button name="create_request" string="Submit" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="training_roomissue_view" model="ir.actions.act_window">
+            <field name="name">issue id</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">training.roomissue</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="training_roomissue_view_form"/>
+            <field name="target">new</field>
+        </record>
+</odoo>
