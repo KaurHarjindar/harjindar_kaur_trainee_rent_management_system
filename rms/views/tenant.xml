@@ -5,15 +5,19 @@
         <field name="model">training.tenantroomselection</field>
         <field name="arch" type="xml">
             <form String="roomallotment form">
-                <header>
-                    <button name="%(training_roomissue_view)d" type="action" class="oe_highlight" string="Add RoomIssue"  />
-                </header>
                 <sheet>
                     <group>
                         <field name="name"/>
                         <field name="propertyname"/>
-                        <field name="ownername"/>
+                        <field name="ownerName"/>
+                        <field name="address" />
+                        <field name="city"/>
+                        <field name="state"/>
+                        <field name="rent"/>
+                        <field name="Total_rent"/>
                         <field name="Joining_date"/>
+                        <field name="leave_date"/>
+                        <!-- <field name="months"/> -->
                     </group>
                 </sheet>        
             </form>

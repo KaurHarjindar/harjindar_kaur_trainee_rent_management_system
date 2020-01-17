@@ -8,7 +8,7 @@
         'reports/tenantReport.xml',
         'reports/tenantReportView.xml',
 
-        'wizard/roomissue_view.xml',
+        # 'wizard/roomissue_view.xml',
        	
         'views/firstView.xml',
        	'views/owner.xml',
