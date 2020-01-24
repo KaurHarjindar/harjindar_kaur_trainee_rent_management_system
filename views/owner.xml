@@ -1,0 +1,276 @@
+<odoo>
+    <record model="ir.ui.view" id="billviewForm">
+        <field name="name">training.form</field>
+        <field name="model">training.bill</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="billtype" />
+                        <field name="hide" invisible="1"/>
+                        <field name="tenantname" attrs="{'invisible': [('hide', '=', False)]}"/>
+                        <field name="bdate" />
+                        <field name="payment" /> 
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="billview">
+        <field name="name">training.tree</field>
+        <field name="model">training.bill</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="billtype" />
+                <field name="tenantname"/>
+                <field name="bdate" />
+                <field name="payment" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="bill_pivot" model="ir.ui.view">
+       <field name="name">bill.pivot</field>
+       <field name="model">training.bill</field>
+       <field name="arch" type="xml">
+           <pivot string="Total bill">
+               <field name="billtype" type="row"/>
+               <field name="payment" type="col"/>
+           </pivot>
+       </field>
+    </record>
+
+    <record id="bill_graph" model="ir.ui.view">
+        <field name="name">bill graph</field>
+        <field name="model">training.bill</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="billtype" />
+                <field name="payment" type="measure" />
+            </graph>
+        </field>
+    </record>
+   
+    <record id="bill_dashboard" model="ir.ui.view">
+            <field name="name">bill.view.dashboard</field>
+            <field name="model">training.bill</field>
+            <field name="arch" type="xml">
+                <dashboard>
+                    <view type="pivot" ref="rms.bill_pivot"/>
+                    <group string="Sale">
+                        <aggregate name="payment" field="payment" domain="[('billtype', '=', ['Electricity','internet' ])]" string="Total Bill of Electricity and Internet"/>
+                        <aggregate name="tenantname" field="tenantname" string="Tenants"/>
+                    </group>
+                    <view type="graph" ref="rms.bill_graph"/>
+                </dashboard>
+            </field>
+    </record>
+  
+
+    <record model="ir.ui.view" id="tenantseview">
+        <field name="name">training.tree</field>
+        <field name="model">training.tenants</field>
+        <field name="arch" type="xml">
+            <tree string="tree view" decoration-info="Occupation=='Study'">
+                <field name="name" />
+                <field name="dob" />
+                <field name="phone" />
+                <field name="gender" />
+                <field name="email" />
+                <field name="Occupation" />
+                <field name="Home_address" />
+                <field name="Father_name" />
+                <field name="Fphone" />
+                <field name="status"/>
+                <button string="Paid" type="object" name="checkstatus" attrs="{'invisible': [('status', '=', 'Paid')]}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="propertiesTree">
+        <field name="name">training property</field>
+        <field name="model">training.propertyregi</field>
+        <field name="arch" type="xml">
+            <tree>
+                    <field name="ptype" />
+                    <field name="city" />
+                    <field name="state" />
+                    <field name="rentPerBed" />
+                    <field name="foodtype" />
+                    <field name="bedrooms" />
+                    <field name="furnish" />
+                    <field name="beds" />
+                    <field name="AvialbleFrom" />  
+                    <field name="rules" />
+                    <field name="lentry" /> 
+                    <field name="image" widget='image' />                  
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="propertiesForm">
+        <field name="name">training  property</field>
+        <field name="model">training.propertyregi</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button icon="fa-question" type="object"  name="">
+                            <div class="o_stat_info">
+                                <span>Total</span><br/>
+                                <span>Inquiry</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="col-md-5">
+                            <group>
+                                <field name="ptype"  />
+                                <field name="pgfor" attrs="{'invisible': [('ptype', '=', False)]}" style="width:50%%" widget="radio"/>
+                                <field name="share" attrs="{'invisible': [('ptype', '=', False)]}" style="width:50%%" widget="radio"/>
+                            </group>
+                        </div>
+                        <div class="col-md-5">
+                            <group>
+                                <field name="address" />
+                                <field name="city" />
+                                <field name="state" />
+                                <field name="location" />
+                            </group>
+                        </div>    
+                    </div>
+                    
+                    
+                    <!-- Property Details -->
+                    <notebook>
+                        <page name="page1"  string="Payment Information">
+                            <group>
+                                <field name="rentPerBed" />
+                                <field name="maintance" />
+                                <field name="maintype" />
+                                <field name="deposite" />
+                                <field name="include" widget="many2many_tags" />
+                                <field name="hide" invisible="1"/>
+                                <field name="weekday" attrs="{'invisible': [('hide', '!=', True)]}" style="width:50%%" widget="many2many_checkboxes"/>
+                                <field name="foodtype" widget="radio" />
+                            </group>
+                        </page>
+                        <page name="page2" string="Property Information">
+                            <group>
+                                <field name="bedrooms" /> 
+                                <field name="furnish"  />
+                                <field name="beds" />
+                                <field name="tenants" />
+                            </group>
+                            <group>
+                                <field name="Propertyfloor" />
+                                <field name="Totalfloor" />
+                                <field name="AvialbleFrom" />  
+                                <field name="rules" />
+                                <field name="lentry" />  
+                                <field name="image" widget='image' /> 
+                            </group> 
+                        </page>
+                    </notebook>
+                    
+                </sheet>
+            </form>
+        </field>
+    </record>
+   
+   
+
+    <record model="ir.ui.view" id="inquiryTree">
+        <field name="name">training inquiry</field>
+        <field name="model">training.inquiry</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="email" />
+                <field name="phone" />
+                <field name="CheckIn" />
+                <field name="Checkout" />
+                <field name="Intrestin" />            
+            </tree>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="inquiryForm">
+        <field name="name">Statusbar</field>
+        <field name="model">training.inquiry</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Workflow record">
+                <header>
+                    <!-- <button string="Set to concept" type="object" name="concept_progressbar" attrs="{'invisible': [('state', '=', 'concept')]}"/>
+                    <button string="Set to started" type="object" name="started_progressbar" class="oe_highlight" attrs="{'invisible': [('state','!=','concept')]}"/>
+                    <button string="In progress" type="object" name="progress_progressbar" attrs="{'invisible': [('state','=','progress')]}"/>
+                    <button string="Done" type="object" name="done_progressbar" attrs="{'invisible': [('state','=','finished')]}"/>
+                    <field name="state" widget="statusbar"/> -->
+                </header>
+                <group>
+                    <field name="name" />
+                    <field name="email" />
+                    <field name="phone" />
+                    <field name="state" widget="statusbar"/>
+                    <field name="CheckIn" attrs="{'invisible': [('state', 'not in',['concept'])]}" />
+                    <field name="Checkout" />
+                    <field name="Intrestin" /> 
+
+                </group>
+            </form>
+        </field>
+    </record>
+   
+    
+    <record id="inquiry_action" model="ir.actions.act_window">
+        <field name="name">training  tenant inquiry </field>
+        <field name="res_model">training.inquiry</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+   <record id="propertyView" model="ir.actions.act_window">
+        <field name="name">training  tenant Property </field>
+        <field name="res_model">training.propertyregi</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+    <record id="training_regi" model="ir.actions.act_window">
+        <field name="name">training tenantRegi</field>
+        <field name="res_model">training.tenants</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="bill_action" model="ir.actions.act_window">
+        <field name="name">Total Bill</field>
+        <field name="res_model">training.bill</field>
+        <field name="view_mode">tree,form,pivot,dashboard,graph</field>
+    </record>
+
+    <!-- config Table -->
+
+    <record id="featuresView" model="ir.actions.act_window">
+        <field name="name">training  tenant features </field>
+        <field name="res_model">training.features</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="foodView" model="ir.actions.act_window">
+        <field name="name">training  tenant food </field>
+        <field name="res_model">training.food</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+   
+
+    <menuitem id="tenants_owner_root" name="RMS" web_icon="rms,static/description/icon.png" />
+    <menuitem id="property" name="Owner" parent="tenants_owner_root" action="propertyView" sequence="1"/>
+    <menuitem id="inquiry" name="Inquiry" parent="tenants_owner_root" action="inquiry_action" sequence="2"/>
+    <menuitem id="tenants" name="Tenants" parent="tenants_owner_root" action="training_regi" sequence="3"/>
+    <menuitem id="bill" name="Bill" parent="tenants_owner_root" action="bill_action" sequence="4"/>
+
+    <menuitem id="config" name="configration" parent="tenants_owner_root"/>
+    <menuitem id="features" name="features" parent="config" action="featuresView"/>
+    <menuitem id="food" name="food" parent="config" action="foodView"/>
+
+    <menuitem id="report" name="Reporting" parent="tenants_owner_root" action=""/>
+
+
+   
+</odoo>

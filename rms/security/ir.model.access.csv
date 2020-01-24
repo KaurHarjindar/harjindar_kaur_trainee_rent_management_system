@@ -1,7 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_training_owner,training.owner,model_training_owner,base.group_user,1,1,1,1
-access_training_property,access_training_property,model_training_property,base.group_user,1,1,1,1  
-access_training_rooms,access_training_rooms,model_training_rooms,base.group_user,1,1,1,1 
-access_training_tenants,access_training_tenants,model_training_tenants,base.group_user,1,1,1,1 
-access_training_tenantroomselection,access_training_tenantroomselection,model_training_tenantroomselection,base.group_user,1,1,1,1
-access_training_tenantroomallocate,access_training_tenantroomallocate,model_training_tenantroomallocate,base.group_user,1,1,1,1

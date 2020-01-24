@@ -2,17 +2,17 @@
     'name' : 'Tenants Management system',
     'version' : '1.1',
     'summary' : 'manage the tenants',
+    'author': "Harjindar",
+    'depends': ['web_dashboard'],
     'data' : [
         'security/ir.model.access.csv',
 
-        'reports/tenantReport.xml',
-        'reports/tenantReportView.xml',
-
-        # 'wizard/roomissue_view.xml',
+        # 'wizard/inquiry_view.xml',
        	
-        'views/firstView.xml',
        	'views/owner.xml',
-       	'views/tenant.xml',
-        'views/template.xml'
     ],
+    'demo' : [
+      'demo/demo.xml',
+    ],
+       
 }

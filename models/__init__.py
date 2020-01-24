@@ -1,2 +1,2 @@
 #from . import firstModel
-from . import mainModel
+from . import owner

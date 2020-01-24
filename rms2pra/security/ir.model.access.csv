@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_training_owner,access_training_owner,model_training_owner,base.group_user,1,1,1,1 
-access_training_room,access_training_room,model_training_room,base.group_user,1,1,1,1
